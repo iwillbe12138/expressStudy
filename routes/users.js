@@ -2,7 +2,7 @@
  * @Description:
  * @Author: IWillBe12138
  * @Date: 2022-06-28 16:20:42
- * @LastEditTime: 2022-06-28 17:32:44
+ * @LastEditTime: 2022-07-06 13:04:28
  * @LastEditors: IWillBe12138
  */
 var express = require('express')
@@ -12,7 +12,7 @@ var router = express.Router()
 // router.get('/', function (req, res, next) {
 //     res.send('hello express')
 // })
-router.post('/', function (req, res, next) {
+router.get('/', function (req, res, next) {
     res.send('hello express by post')
 })
 module.exports = router

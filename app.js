@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: IWillBe12138
  * @Date: 2022-06-28 16:20:42
- * @LastEditTime: 2022-07-11 10:32:58
+ * @LastEditTime: 2022-07-14 13:51:04
  * @LastEditors: IWillBe12138
  */
 var createError = require('http-errors');
@@ -14,6 +14,8 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var uploadRouter = require('./routes/upload');
+var loginRouter = require('./routes/login');
+var foodsRouter = require('./routes/foods');
 var throwErrRouter = require('./routes/throwErr');
 
 var app = express();
@@ -77,6 +79,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/uploading', uploadRouter);
+app.use('/login', loginRouter);
+app.use('/foods', foodsRouter);
 app.use('/throwErr', throwErrRouter);
 
 

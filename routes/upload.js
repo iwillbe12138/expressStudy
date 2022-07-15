@@ -2,7 +2,7 @@
  * @Description:
  * @Author: IWillBe12138
  * @Date: 2022-06-30 09:34:58
- * @LastEditTime: 2022-07-04 16:48:12
+ * @LastEditTime: 2022-07-14 14:21:44
  * @LastEditors: IWillBe12138
  */
 let express = require('express')
@@ -12,7 +12,7 @@ let util = require('util')
 let fs = require('fs')
 let path = require('path')
 router.get('/', function (req, res, next) {
-    res.sendFile( path.resolve(__dirname,'..','views','index.html') );
+    res.sendFile( path.resolve(__dirname,'..','views','uploading.html') );
 })
 
 // 文件上传处理

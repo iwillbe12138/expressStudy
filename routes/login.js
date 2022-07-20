@@ -2,7 +2,7 @@
  * @Description: login
  * @Author: IWillBe12138
  * @Date: 2022-07-11 16:02:00
- * @LastEditTime: 2022-07-15 15:41:14
+ * @LastEditTime: 2022-07-20 14:21:19
  * @LastEditors: IWillBe12138
  */
 
@@ -26,10 +26,10 @@ let goods={
 
 router.use(bodyParse.urlencoded({extended:false}))
 
-router.get('/', (req, res) => {
-    //发送get请求，用req.query接收传过来的值
-    res.sendfile(path.resolve(__dirname,'..','views','index.html'))
-})
+// router.get('/', (req, res) => {
+//     //发送get请求，用req.query接收传过来的值
+//     res.sendfile(path.resolve(__dirname,'..','views','index.html'))
+// })
 
 router.post('/', (req, res) => {
     //发送get请求，用req.query接收传过来的值

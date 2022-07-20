@@ -1,0 +1,44 @@
+<!--
+ * @Description: 
+ * @Author: IWillBe12138
+ * @Date: 2022-06-30 14:50:03
+ * @LastEditTime: 2022-07-18 11:23:43
+ * @LastEditors: IWillBe12138
+-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>登录</title>
+    </head>
+    <body>
+        <form action="">
+            帐号：<input type="text" name="username" />
+            <br />
+            密码：<input type="text" name="password" />
+            <br />
+            <input type="button" id="doLogin" value="登录" />
+        </form>
+    </body>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+        $('#doLogin').click(function () {
+            $.ajax({
+                type:'post',
+                url:'/login',
+                data:$('form').serialize()
+            }).then(function(res){
+                console.log(res)
+                if(res.code==200){
+                    location.href='./index.html'
+                }
+                else{
+                    alert('帐号或密码错误，请重新输入！')
+                }
+                
+            })
+        })
+    </script>
+</html>

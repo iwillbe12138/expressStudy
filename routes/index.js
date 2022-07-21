@@ -2,7 +2,7 @@
  * @Description: index
  * @Author: IWillBe12138
  * @Date: 2022-07-06 12:35:01
- * @LastEditTime: 2022-07-20 17:32:43
+ * @LastEditTime: 2022-07-21 17:35:38
  * @LastEditors: IWillBe12138
  */
 var express = require('express')
@@ -118,39 +118,131 @@ const { resolve } = require('path')
 //     }
 // })
 
+const mysql = require('mysql')
+const mongoose = require('mongoose')
 
-const mysql=require('mysql')
-
-let connection=mysql.createConnection({
-    host:'175.24.187.235',
-    port:3306,
-    user:'root',
-    password:'Rr20080808.',
-    database:'person_will_mysql'
-})
-
-connection.connect((err)=>{
-    if(err){
-        console.error('连接错误：'+err.stack)
-        return
+mongoose.connect('mongodb://127.0.0.1:27017/stuManager', err => {
+    if (err) {
+        throw err
+    } else {
+        console.log('mongoDB数据库连接成功')
     }
-    console.log('连接ID'+connection.threadId)
 })
+
+const stuSchema = new mongoose.Schema({
+    //Schema 首字母大写，为构造函数
+    sId: String,
+    sNo: String,
+    sName: String,
+    sSex: String,
+    sBirthday: Date,
+    class: String
+})
+
+const stuModel = mongoose.model('student', stuSchema, 'student')
+
+let stuInfo = {
+    sId: '002',
+    sNo: '667',
+    sName: '何志祥11',
+    sSex: '男',
+    sBirthday: '1996-02-01',
+    class: '20033'
+}
+
+let student = new stuModel()
+student.sId = stuInfo.sId
+student.sNo = stuInfo.sNo
+student.sName = stuInfo.sName
+student.sSex = stuInfo.sSex
+student.sBirthday = stuInfo.sBirthday
+student.class = stuInfo.class
+// console.log(student)
+
+// student.save((err)=>{
+//     if(err){
+//         throw err
+//     }
+//     else{
+//         console.log('添加成功!')
+//     }
+// })
+
+//修改
+// stuModel.update(
+//     {
+//         sId: '001'
+//     },
+//     {
+//         $set: {
+//             sName: '何志祥1234',
+//             sSex: '女'
+//         }
+//     },
+//     (err, result) => {
+//         if (err) {
+//             console.log(err)
+//             throw err
+//         } else {
+//             console.log('修改成功')
+//             console.log(result)
+//         }
+//     }
+// )
+
+
+let id=null
+
+//查询
+stuModel.find({}).exec((err,data)=>{
+    // console.log(JSON.stringify(data) )
+    console.log(data[0]._id)
+    id=data[0]._id
+
+    // 删除
+    stuModel.findById(id).remove((err)=>{
+        if(err){
+            console.log(err)
+            throw err
+        }
+        else{
+            console.log('删除成功')
+        }
+    })
+})
+
+
+
+// let connection=mysql.createConnection({
+//     host:'175.24.187.235',
+//     port:3306,
+//     user:'root',
+//     password:'Rr20080808.',
+//     database:'person_will_mysql'
+// })
+
+// connection.connect((err)=>{
+//     if(err){
+//         console.error('连接错误：'+err.stack)
+//         return
+//     }
+//     console.log('连接ID'+connection.threadId)
+// })
 
 // let sql='select * from user'
 // let sql='insert into user values (?,?)'
 // let sql='update user set user_name=? where user_id=?'
-let sql='delete from '
+// let sql='delete from user where user_id=1'
 // let params=[1,'何志祥']
-let params=['何志祥111',1]
-connection.query(sql,params,(err,result)=>{
-    if(err){
-        console.log('查询出错',err.message)
-        return
-    }
-    console.log('修改成功')
-    console.log(result)
-})
+// let params=['何志祥111',1]
+// connection.query(sql,params,(err,result)=>{
+//     if(err){
+//         console.log('查询出错',err.message)
+//         return
+//     }
+//     console.log('修改成功')
+//     console.log(result)
+// })
 
 router.use('/', function (req, res) {
     res.end('welcome')
